@@ -69,6 +69,8 @@ def get_specific(arg):
 
 x = get_investors()
 
+
+# to print out the list of available filings. could add prompt (See available portfolios? Y/N)
 #for i in x:
 #    print(i.name)
 
