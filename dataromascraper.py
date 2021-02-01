@@ -38,7 +38,7 @@ class Investor():
 
 #reformatting the dataframe
         df.columns = [0,1,'Ticker','Weight','Shares','Action','Price','Value','']
-        df['Ticker'] = df['Ticker'].str.split('-', expand=True)
+        df['Ticker'] = df['Ticker'].str.split('-', expand=True)  #to update split to make 2 columns, ticker + company
         df['Weight'] = df['Weight'].astype(float)/100
         #df['Company'] = df['Stock'].str.rsplit('-')
         df = df.drop(columns = [0,1])
