@@ -1,1 +1,5 @@
-# Dataroma
+python version of this R code https://www.codingfinance.com/post/2020-01-06-web-scraping-dataroma_r/ 
+
+dplyr vs pandas reference:  https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html
+
+basic functionality
