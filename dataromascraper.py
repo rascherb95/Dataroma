@@ -66,7 +66,7 @@ def get_specific(arg):
         print("-"*100)
         print("{} not found".format(arg))
 
-
+#should be renamed investor_list for easier readability
 x = get_investors()
 
 
