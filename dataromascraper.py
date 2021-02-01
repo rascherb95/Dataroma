@@ -49,7 +49,7 @@ class Investor():
 def get_specific(arg):
     i=0
     found = False
-    while i < len(x):
+    while i < len(x):  #loops thru entire list even if investor is found early, remove found(and if/else) & rewrite as IF _ if in X,break -> else: p(not found)
         for _ in x:
             if arg in x[i].name:  #basic string search (unique last name only)
                 found = True
