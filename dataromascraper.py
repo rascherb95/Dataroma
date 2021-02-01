@@ -48,23 +48,23 @@ class Investor():
 #to get our chosen investor's portfolio
 def get_specific(arg):
     i=0
-    found = False
-    while i < len(x):  #loops thru entire list even if investor is found early, remove found+if/else & rewrite as IF arg in X,break -> else: p(not found)
+    found = False #delete
+    while i < len(x):  #delete
         for _ in x:    # re-write to not be a nested loop
             if arg in x[i].name:  #basic string search (unique last name only)
-                found = True
-                inv_num = i      #stored to then retrieve the portfolio
-                i+=1        
-            else:
-                i+=1
-    if found:
+                found = True #delete
+                inv_num = i      # unnecessary, re-write to return (_.get_portfolio())
+                i+=1     #delete    
+            else:        #delete
+                i+=1     #delete
+    if found:# move into if arg in x...
         print("-"*100)
         print(x[inv_num].name)
         print("-"*100)
         print(x[inv_num].get_portfolio())
-    else:
+    else: #is implied after rewrite, slight tweak 
         print("-"*100)
-        print("{} not found".format(arg))
+        print("{} not found".format(arg)) 
 
 #should be renamed investor_list for easier readability
 x = get_investors()
