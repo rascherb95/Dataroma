@@ -27,7 +27,7 @@ class Investor():
     def get_portfolio(self):
         html = urlopen(self.url)
         soup = BeautifulSoup(html.read(),'lxml')
-        
+
         portfolio = []
         tbody= soup.tbody
         tr = tbody.find_all('tr')
@@ -47,22 +47,14 @@ class Investor():
         
 #to get our chosen investor's portfolio
 def get_specific(arg):
-    i=0
-    found = False #delete
-    while i < len(x):  #delete
-        for _ in x:    # re-write to not be a nested loop
-            if arg in x[i].name:  #basic string search (unique last name only)
-                found = True #delete
-                inv_num = i      # unnecessary, re-write to return (_.get_portfolio())
-                i+=1     #delete    
-            else:        #delete
-                i+=1     #delete
-    if found:# move into if arg in x...
-        print("-"*100)
-        print(x[inv_num].name)
-        print("-"*100)
-        print(x[inv_num].get_portfolio())
-    else: #is implied after rewrite, slight tweak 
+    for i in x:
+        if arg in i.name:
+            print("-"*100)
+            print(i.name)
+            print("-"*100)
+            print(i.get_portfolio())
+            break
+    else:
         print("-"*100)
         print("{} not found".format(arg)) 
 
@@ -74,12 +66,10 @@ x = get_investors()
 #for i in x:
 #    print(i.name)
 
-
 print('Fund manager last name:')
 chosen_investor = (input())
 chosen_investor = chosen_investor.capitalize()
 
- 
 
 #runs everything
 get_specific(chosen_investor)
