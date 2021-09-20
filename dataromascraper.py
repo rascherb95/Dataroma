@@ -33,6 +33,8 @@ class Investor():
         soup = BeautifulSoup(html.read(),'lxml')
 
         portfolio = []
+        #portfolio_date = soup.find_all('p',{'id' : 'p2'})      OPEN to add in porfolio date as DF column
+        
         tbody = soup.tbody
         tr = tbody.find_all('tr')
 
@@ -53,9 +55,10 @@ class Investor():
         df['Price']  = df['Price'].str.replace('$','').astype(float)
         df['Actual value'] = df['Shares'] * df['Price']
         #df['Company'] = df['Stock'].str.rsplit('-')
-        df = df.drop(columns = [0])
+        df = df.drop(columns = [0])   
 
         df.to_excel(f'{chosen_investor}.xlsx')
+       # print(f'the portfolio date is {portfolio_date[1]}')
 
         return df
 
