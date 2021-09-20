@@ -20,6 +20,21 @@ def get_investors():
         investors_scrape.append((Investor(link.getText(),link.get('href'))))
     return (investors_scrape)
 
+class Holding():
+
+    def __init__(self, stock, weight, shares, reported_price, reported_value):
+        self.stock = stock
+        self.weight = weight
+        self.shares = shares
+        self.reported_price = reported_price
+        self.reported_value = reported_value
+
+    def get_mktval(self):
+        self.shares = str.replace(',','')
+        self.reported_price = str.replace(',','')
+
+        return self.shares * self.reported_price    
+
 #investor class
 class Investor():
    
@@ -52,7 +67,7 @@ class Investor():
         #df['Company'] = df['Stock'].str.rsplit('-')
         df = df.drop(columns = [0,1])
 
-        df.to_excel('output.xlsx',index=False)
+        df.to_excel(f'{chosen_investor}.xlsx')
 
         return df
 
