@@ -20,22 +20,6 @@ def get_investors():
         investors_scrape.append((Investor(link.getText(),link.get('href'))))
     return (investors_scrape)
 
-class Holding():
-
-    def __init__(self, stock, weight, shares, reported_price, reported_value):
-        self.stock = stock
-        self.weight = weight
-        self.shares = shares
-        self.reported_price = reported_price
-        self.reported_value = reported_value
-
-    def get_mktval(self):
-        self.shares = str.replace(',','')
-        self.reported_price = str.replace(',','')
-
-        return self.shares * self.reported_price    
-
-#investor class
 class Investor():
    
     def __init__(self,name,investor_url):
@@ -55,17 +39,21 @@ class Investor():
         for t in tr:
             portfolio.append(t.text.split('\n'))
             df = pd.DataFrame(portfolio)
-        
 
-#reformatting the dataframe
-        df.columns = [0,1,'Ticker','Weight','Shares','Action','Price','Rounded Value','True value']
-        df['Ticker'] = df['Ticker'].str.split('-', expand=True)  #self note to update split to make 2 columns, ticker + company
+        df.columns = [0,'Ticker','Yahoo','Weight','Shares','Action','Price','Reported Value','Actual value']
+
+        #The data is 9 items so 9 columns. 'Yahoo' column is imported as a list of [Ticker, Company name]. 
+        #The re-ordering of yahoo into ticker below is for formatting & ordering purposes
+        ###OPEN to explode the list into two columns 'Ticker' & 'Full Name'
+
+        df['Ticker'] = df['Yahoo'].str.split('-', expand=True) 
+        df['Yahoo'] = yahoo_base + df['Ticker']
         df['Weight'] = df['Weight'].astype(float)/100
         df['Shares'] = df['Shares'].str.replace(',','').astype(int)
         df['Price']  = df['Price'].str.replace('$','').astype(float)
-        df['True value'] = df['Shares'] * df['Price']
+        df['Actual value'] = df['Shares'] * df['Price']
         #df['Company'] = df['Stock'].str.rsplit('-')
-        df = df.drop(columns = [0,1])
+        df = df.drop(columns = [0])
 
         df.to_excel(f'{chosen_investor}.xlsx')
 
