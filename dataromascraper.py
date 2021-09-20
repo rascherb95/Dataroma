@@ -5,13 +5,14 @@ import matplotlib.pyplot as plt
 
 base_url = 'https://www.dataroma.com'
 yahoo_base = 'https://finance.yahoo.com/quote/'
+headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
 
 
 #to create a list of our investors
 def get_investors():
 
     investors_scrape = []
-    req = Request(base_url , headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"})
+    req = Request(base_url , headers = headers)
     html = urlopen(req,data=None)
     soup = BeautifulSoup(html.read(),'lxml')
 
@@ -27,7 +28,7 @@ class Investor():
         self.url = base_url + investor_url
 
     def get_portfolio(self):
-        Investor_req = Request(self.url,headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"})
+        Investor_req = Request(self.url,headers = headers)
         html = urlopen(Investor_req) # request needs to have user:agent to avoid 403 error
 
         soup = BeautifulSoup(html.read(),'lxml')
